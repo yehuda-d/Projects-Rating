@@ -79,4 +79,38 @@ router.get('/:id',(req,res)=>{
     res.json(product);
 })
 
+//עדכון אובייקט
+router.patch('/:id',uplode.single('myFile'),(req,res)=>{
+     //ולידציה
+    let id = Number(req.params.id);
+    if(isNaN(id)){
+        return res.json({message:"לא חוקי"})
+    }
+    let product = products[id];
+    if(!product){
+        return res.json("לא קיים")
+    }
+
+    let Oldfilename = product.Myfilename;
+    let Newfilename = req.file ? req.file.filename : null;
+    if(Oldfilename && Newfilename && Newfilename != Oldfilename){
+        if(fs.existsSync(path.join('uploads',Oldfilename))){
+            fs.unlinkSync(path.join('uploads',Oldfilename))
+        }
+        product.Myfilename = Newfilename;
+    }
+
+    let name = req.body.name;
+    let description = req.body.description;
+    if(name){
+        product.name = name;       
+    }
+    if(description){
+        product.description = description;
+    }
+
+    res.json({message:"ok"});
+
+})
+
 module.exports = router;    
