@@ -34,6 +34,6 @@ function createGrid(data){
     document.getElementById("main").innerHTML = txt;
 }
 
-getData()
+getData();
 addTitle();
 
