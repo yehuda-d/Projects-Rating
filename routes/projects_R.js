@@ -65,4 +65,18 @@ router.delete('/:id',(req,res)=>{
 
 })
 
+//נקודת קצה של הצגת אובייקט
+router.get('/:id',(req,res)=>{
+    //ולידציה
+    let id = Number(req.params.id);
+    if(isNaN(id)){
+        return res.json({message:"לא חוקי"})
+    }
+    let product = products[id];
+    if(!product){
+        return res.json("לא קיים")
+    }
+    res.json(product);
+})
+
 module.exports = router;    
