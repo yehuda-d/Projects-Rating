@@ -25,7 +25,7 @@ function createGrid(data){
                     <div>${obj.description}</div>
                 </div>
                 <div>
-                    <button onclick="deleteProject(${obj.id})">מחיקה</button>
+                    <button onclick="deleteProject(event,${obj.id})">מחיקה</button>
                     <button onclick="getById(${obj.id})">עריכה</button>
                 </div>
             </div>`
@@ -65,7 +65,8 @@ function clearInputs(){
     document.getElementById("myImage").src = "";
 }
 
-async function deleteProject(id) {
+async function deleteProject(event,id) {
+    event.stopPropagation(); // מונע פתיחת openProject
     try {
         if(confirm('האם אתה בטוח שברצומך למחוק?')){
             await fetch(`/p/${id}`,{
