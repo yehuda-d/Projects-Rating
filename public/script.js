@@ -125,6 +125,7 @@ function addOrEdit(){
     }
 }
 
+
 getData();
 addTitle();
 
