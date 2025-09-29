@@ -1,5 +1,5 @@
 function addTitle(){
-    let txt = "Projects Rating"
+    let txt = "דירוג פרוייקטים"
     document.getElementById("h1").innerText = txt;
 }
 
@@ -25,8 +25,8 @@ function createGrid(data){
                     <div>${obj.description}</div>
                 </div>
                 <div>
-                    <button onclick="deleteProject(${obj.id})">Delete</button>
-                    <button onclick="getById(${obj.id})">Edit</button>
+                    <button onclick="deleteProject(${obj.id})">מחיקה</button>
+                    <button onclick="getById(${obj.id})">עריכה</button>
                 </div>
             </div>`
         }
