@@ -137,7 +137,18 @@ let params = new URLSearchParams(window.location.search);
       document.getElementById("ratingInfo").innerText = "דירוג נוכחי: " + (obj.rating || 0).toFixed(2);
     }
 
+ async function rate(score) {
+      let res = await fetch(`/p/${id}/rate`, {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ score })
+      });
+      let data = await res.json();
+      alert(data.message);
+      loadProject();
+    }
 
+    loadProject();
 getData();
 addTitle();
 
