@@ -18,7 +18,7 @@ function createGrid(data){
     for (obj of data) {
         if(obj){
             txt+=
-            `<div class="card">
+            `<div class="card" onclick="openProject(${obj.id})">
                     <div>
                     <img src="../uploads/${obj.Myfilename}?t=${Date.now()}" alt="${obj.name}">
                     <p>${obj.name}</p>
@@ -82,12 +82,13 @@ async function getById(id) {
    try {
     let response = await fetch(`/p/${id}`);
     let obj = await response.json();
-    console.log(obj);
     document.getElementById('id').value = obj.id;
     document.getElementById('name').value = obj.name;
     document.getElementById('description').value = obj.description;
     document.getElementById('myImage').src = "../uploads/" + obj.Myfilename;
-    console.log(obj.Myfilename);
+    document.getElementById("ratingInfo").innerText = 
+   obj.rating ? `דירוג נוכחי: ${obj.rating.toFixed(2)} (${obj.ratingCount} מדרגים)` 
+              : "עדיין אין דירוגים";
     
    } catch (err) {
     alert(err);
@@ -147,6 +148,11 @@ let params = new URLSearchParams(window.location.search);
       alert(data.message);
       loadProject();
     }
+
+    function openProject(id){
+    // נפתח דף חדש עם query string של id
+    window.open(`project.html?id=${id}`, "_blank");
+}
 
     loadProject();
 getData();
