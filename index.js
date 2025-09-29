@@ -5,11 +5,12 @@ const app = express();
 const port = 4500;
 
 //מידלוורים
-app.use(express.static(__dirname));
 app.use(express.json());
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
 
 //נתיבים    
-app.get('/',(req,res)=>{ res.sendFile(__dirname + '/public/index.html')});
+app.get('/',(req,res)=>{ res.sendFile(path.join(__dirname,'public','index.html'))});
 app.use('/p',require('./routes/projects_R'))
 
 

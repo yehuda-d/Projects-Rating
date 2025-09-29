@@ -123,7 +123,7 @@ router.post('/:id/rate', (req, res) => {
         return res.status(400).json({ message: "דירוג לא חוקי" });
     }
 
-    let project = products[id];
+    let project = projects[id];
     if (!project) {
         return res.status(404).json({ message: "פרויקט לא קיים" });
     }
