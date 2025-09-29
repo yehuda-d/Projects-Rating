@@ -34,6 +34,41 @@ function createGrid(data){
     document.getElementById("main").innerHTML = txt;
 }
 
+
+//עוד לא עשיתי קומיט ופוש לפונקציות האלו כי הן עוד לא עובדות
+async function addProject(){
+    try {
+        let name = document.getElementById("name").value;
+        let description = document.getElementById("description").value;
+        let myFile = document.getElementById("myFile").files[0];
+        let formData = new FormData();
+        formData.append('name',name);
+        formData.append('description',description);
+        if(myFile){
+            formData.append('myFile',myFile);
+        }
+        await fetch('/p',{
+            method: 'POST',
+            body:formData
+        })
+        getData();
+        clearInputs();
+    } catch (err) {
+        alert(err);
+    }
+}
+
+function clearInputs(){
+    document.getElementById("id").value = "";
+    document.getElementById("name").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("myFile").value = "";
+    document.getElementById("myImage").src = "";
+}
+
+
+
+
 getData();
 addTitle();
 

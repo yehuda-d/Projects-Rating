@@ -4,7 +4,7 @@ const multer = require('multer');//ספרייה שנותנת להעלות קבצ
 const fs = require('fs');//ספרייה שנותנת לערוך קבצים
 const path = require('path');
 
-const products = [];
+const projects = [];
 let nextID = 1;
 
 //אם אין תיקייה כזו אז שתייצר אותה
@@ -26,7 +26,7 @@ const storage = multer.diskStorage({
 const uplode = multer({storage: storage});
 
 router.get('/',(req,res)=>{
-    res.status(200).json(products)
+    res.status(200).json(projects)
 });
 
 router.post('/',uplode.single('myFile'),(req,res)=>{
@@ -38,7 +38,7 @@ router.post('/',uplode.single('myFile'),(req,res)=>{
     let description = (req.body.description);
     let Myfilename = req.file ? req.file.filename : null;
     let product = {id,name,description,Myfilename};
-    products[id] = product;
+    projects[id] = product;
      res.status(201).json({message:"ok"})
 
 })
@@ -50,7 +50,7 @@ router.delete('/:id',(req,res)=>{
     if(isNaN(id)){
         return res.json({message:"לא חוקי"})
     }
-    let product = products[id];
+    let product = projects[id];
     if(!product){
         return res.json("לא קיים")
     }
@@ -60,7 +60,7 @@ router.delete('/:id',(req,res)=>{
             fs.unlinkSync(path.join('uploads',product.Myfilename))
         }
     }
-    products[id] = null;
+    projects[id] = null;
     res.json({message:"ok"});
 
 })
@@ -72,7 +72,7 @@ router.get('/:id',(req,res)=>{
     if(isNaN(id)){
         return res.json({message:"לא חוקי"})
     }
-    let product = products[id];
+    let product = projects[id];
     if(!product){
         return res.json("לא קיים")
     }
@@ -86,7 +86,7 @@ router.patch('/:id',uplode.single('myFile'),(req,res)=>{
     if(isNaN(id)){
         return res.json({message:"לא חוקי"})
     }
-    let product = products[id];
+    let product = projects[id];
     if(!product){
         return res.json("לא קיים")
     }
