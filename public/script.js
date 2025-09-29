@@ -26,7 +26,7 @@ function createGrid(data){
                 </div>
                 <div>
                     <button onclick="deleteProject(event,${obj.id})">מחיקה</button>
-                    <button onclick="getById(${obj.id})">עריכה</button>
+                    <button onclick="getById(event,${obj.id})">עריכה</button>
                 </div>
             </div>`
         }
@@ -79,7 +79,8 @@ async function deleteProject(event,id) {
     }
 }
 
-async function getById(id) {
+async function getById(event,id) {
+    event.stopPropagation();
    try {
     let response = await fetch(`/p/${id}`);
     let obj = await response.json();
