@@ -25,7 +25,7 @@ function createGrid(data){
                     <div>${obj.description}</div>
                 </div>
                 <div>
-                    <button onclick="deleteProduct(${obj.id})">Delete</button>
+                    <button onclick="deleteProject(${obj.id})">Delete</button>
                     <button onclick="getById(${obj.id})">Edit</button>
                 </div>
             </div>`
@@ -35,7 +35,6 @@ function createGrid(data){
 }
 
 
-//עוד לא עשיתי קומיט ופוש לפונקציות האלו כי הן עוד לא עובדות
 async function addProject(){
     try {
         let name = document.getElementById("name").value;
@@ -64,6 +63,19 @@ function clearInputs(){
     document.getElementById("description").value = "";
     document.getElementById("myFile").value = "";
     document.getElementById("myImage").src = "";
+}
+
+async function deleteProject(id) {
+    try {
+        if(confirm('האם אתה בטוח שברצומך למחוק?')){
+            await fetch(`/p/${id}`,{
+                method: 'DELETE'
+        })
+        getData();
+        }
+    } catch (err) {
+        alert(err)
+    }
 }
 
 
