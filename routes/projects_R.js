@@ -86,27 +86,27 @@ router.patch('/:id',uplode.single('myFile'),(req,res)=>{
     if(isNaN(id)){
         return res.json({message:"לא חוקי"})
     }
-    let product = projects[id];
-    if(!product){
+    let project = projects[id];
+    if(!project){
         return res.json("לא קיים")
     }
 
-    let Oldfilename = product.Myfilename;
+    let Oldfilename = project.Myfilename;
     let Newfilename = req.file ? req.file.filename : null;
     if(Oldfilename && Newfilename && Newfilename != Oldfilename){
         if(fs.existsSync(path.join('uploads',Oldfilename))){
             fs.unlinkSync(path.join('uploads',Oldfilename))
         }
-        product.Myfilename = Newfilename;
+        project.Myfilename = Newfilename;
     }
 
     let name = req.body.name;
     let description = req.body.description;
     if(name){
-        product.name = name;       
+        project.name = name;       
     }
     if(description){
-        product.description = description;
+        project.description = description;
     }
 
     res.json({message:"ok"});

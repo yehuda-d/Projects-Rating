@@ -78,6 +78,21 @@ async function deleteProject(id) {
     }
 }
 
+async function getById(id) {
+   try {
+    let response = await fetch(`/p/${id}`);
+    let obj = await response.json();
+    console.log(obj);
+    document.getElementById('id').value = obj.id;
+    document.getElementById('name').value = obj.name;
+    document.getElementById('description').value = obj.description;
+    document.getElementById('myImage').src = "../uploads/" + obj.Myfilename;
+    console.log(obj.Myfilename);
+    
+   } catch (err) {
+    alert(err);
+   } 
+}
 
 
 
