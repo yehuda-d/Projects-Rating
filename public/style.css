@@ -20,6 +20,7 @@ body{
     border-radius: 25px;
     text-align: center;
     background-color: brown;
+    cursor: pointer;
 }
 
 .card img{
